@@ -1,4 +1,4 @@
-#ifndef _S21_MATRIX_OOP_H
+#ifndef _S21_MATRIX_OOP_H  // название проекта - путь к файлу (не считая src)
 #define _S21_MATRIX_OOP_H
 
 #include <iostream>
