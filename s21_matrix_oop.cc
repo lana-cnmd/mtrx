@@ -11,11 +11,9 @@ S21Matrix::S21Matrix(size_t rows, size_t cols) : rows_(rows), cols_(cols)
     }
 }
 
-S21Matrix::S21Matrix(const S21Matrix &other) :
-{ // почему-то ошибка
-    this->rows_ = other.rows_;
-    this->cols_ = other.cols_;
-    this->matrix_ = new double *[other.rows_];
+S21Matrix::S21Matrix(const S21Matrix &other)
+    : rows_(other.rows_), cols_(other.cols_), matrix_(new double *[other.rows_])
+{
     for (size_t i = 0; i < other.rows_; ++i)
     {
         this->matrix_[i] = new double[other.cols_]();
@@ -40,3 +38,7 @@ S21Matrix::~S21Matrix()
     }
     delete matrix_;
 }
+
+// S21Matrix&operator=(const S21Matrix &other)
+// {
+// }
