@@ -3,8 +3,6 @@
 S21Matrix::S21Matrix() : rows_(0), cols_(0), matrix_(nullptr){}
 
 S21Matrix::S21Matrix(size_t rows, size_t cols) : rows_(rows), cols_(cols) {
-    rows_ = rows; // для чего?
-    cols_ = cols; // для чего?
     matrix_ = new double*[rows];
     for (size_t i = 0; i < rows; ++i) {
         matrix_[i] = new double[cols]();
