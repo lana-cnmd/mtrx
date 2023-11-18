@@ -12,7 +12,7 @@ public:
     // S21Matrix(S21Matrix&& other);
     ~S21Matrix();
 
-    // bool EqMatrix(const S21Matrix& other);
+    bool EqMatrix(const S21Matrix &other) const;
     // void SumMatrix(const S21Matrix& other);
     // void SubMatrix(const S21Matrix& other);
     // void MulNumber(const double num);
@@ -22,48 +22,10 @@ public:
     // double Determinant();
     // S21Matrix InverseMatrix();
 
-    S21Matrix &operator=(S21Matrix other)
-    {
-        // S21Matrix copy = other;
-        // std::swap(copy);
-        // return *this;
-        std::swap(other.rows_, rows_);
-        std::swap(other.cols_, cols_);
-        std::swap(other.matrix_, matrix_);
-        return *this;
-    }
-
-    // S21Matrix &operator=(const S21Matrix &other)
-    // {
-    //     if (&other == this)
-    //         return *this;
-
-    //     if (matrix_ != nullptr)
-    //     {
-    //         for (size_t i = 0; i < rows_; ++i)
-    //         {
-    //             delete[] matrix_[i];
-    //         }
-    //         delete[] matrix_;
-    //     }
-
-    //     rows_ = other.rows_;
-    //     cols_ = other.cols_;
-    //     matrix_ = new double *[rows_];
-    //     for (size_t i = 0; i < rows_; ++i)
-    //     {
-    //         matrix_[i] = new double[cols_];
-    //     }
-
-    //     for (size_t i = 0; i < rows_; ++i)
-    //     {
-    //         for (size_t j = 0; j < cols_; ++j)
-    //         {
-    //             matrix_[i][j] = other.matrix_[i][j];
-    //         }
-    //     }
-    //     return *this;
-    // }
+    S21Matrix &operator=(S21Matrix &other);
+    bool operator==(const S21Matrix &other) const;
+    bool operator!=(const S21Matrix &other) const;
+    double &operator()(size_t i, size_t j);
 
 private:
     size_t rows_;

@@ -41,3 +41,43 @@ S21Matrix::~S21Matrix()
         delete[] matrix_;
     }
 }
+
+S21Matrix &S21Matrix::operator=(S21Matrix &other)
+{
+    // S21Matrix copy = other;
+    // std::swap(copy);
+    // return *this;
+    std::swap(other.rows_, rows_);
+    std::swap(other.cols_, cols_);
+    std::swap(other.matrix_, matrix_);
+    return *this;
+}
+
+bool S21Matrix::operator==(const S21Matrix &other) const
+{
+    return EqMatrix(other);
+}
+
+bool S21Matrix::operator!=(const S21Matrix &other) const
+{
+    return !(*this == other);
+}
+
+double &S21Matrix::operator()(size_t i, size_t j)
+{
+    return matrix_[i][j];
+}
+
+bool S21Matrix::EqMatrix(const S21Matrix &other) const
+{
+    if (rows_ != other.rows_ || cols_ != other.cols_)
+        return false;
+    for (size_t i = 0; i < rows_; ++i)
+    {
+        for (size_t j = 0; j < cols_; ++j)
+        {
+            matrix_[i][j] = other.matrix_[i][j];
+        }
+    }
+    return true;
+}
