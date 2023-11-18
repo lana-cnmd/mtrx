@@ -2,7 +2,7 @@
 
 S21Matrix::S21Matrix() : rows_(0), cols_(0), matrix_(nullptr) {}
 
-S21Matrix::S21Matrix(size_t rows, size_t cols) : rows_(rows), cols_(cols)  // тут выделяешь память в теле конструктора
+S21Matrix::S21Matrix(size_t rows, size_t cols) : rows_(rows), cols_(cols) // тут выделяешь память в теле конструктора
 {
     matrix_ = new double *[rows];
     for (size_t i = 0; i < rows; ++i)
@@ -12,7 +12,7 @@ S21Matrix::S21Matrix(size_t rows, size_t cols) : rows_(rows), cols_(cols)  // т
 }
 
 S21Matrix::S21Matrix(const S21Matrix &other)
-    : rows_(other.rows_), cols_(other.cols_), matrix_(new double *[other.rows_])  // тут выделяешь память в списке инициализации
+    : rows_(other.rows_), cols_(other.cols_), matrix_(new double *[other.rows_]) // тут выделяешь память в списке инициализации
 {
     for (size_t i = 0; i < other.rows_; ++i)
     {
@@ -76,7 +76,8 @@ bool S21Matrix::EqMatrix(const S21Matrix &other) const
     {
         for (size_t j = 0; j < cols_; ++j)
         {
-            matrix_[i][j] = other.matrix_[i][j];  // что это?? копирование массива??? напиши тесты на разные матрицы
+            if (fabs(matrix_[i][j] - other.matrix_[i][j] > 1.e-7))
+                return false;
         }
     }
     return true;

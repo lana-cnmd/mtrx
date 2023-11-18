@@ -2,6 +2,7 @@
 #define CPP1_S21_MATRIXPLUS_1_S21_MATRIX_OOP_H
 
 #include <iostream>
+#include <cmath>
 
 class S21Matrix
 {
@@ -22,7 +23,7 @@ public:
     // double Determinant();
     // S21Matrix InverseMatrix();
 
-    S21Matrix &operator=(S21Matrix &other);  // other меняется?
+    S21Matrix &operator=(S21Matrix &other);        // other меняется?
     bool operator==(const S21Matrix &other) const; // кидает исключение?
     bool operator!=(const S21Matrix &other) const; // кидает исключение?
     double &operator()(size_t i, size_t j);

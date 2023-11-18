@@ -7,15 +7,11 @@ void func1()
 
 int main()
 {
-    S21Matrix m1(2, 2);
-    func1();
-    std::cout << "Привет" << std::endl;
-    func1();
-    std::cout << "Привет2" << std::endl;
-    {
-        S21Matrix m2(1, 1);
-    }
-    S21Matrix m2(2, 2);
-    m1 = m2;
+    S21Matrix matrix_a(2, 2), matrix_b(2, 2);
+    matrix_a(0, 0) = 2;
+    matrix_a(0, 1) = 3.2;
+    matrix_a(1, 0) = 0;
+    matrix_a(1, 1) = -23.45;
+    matrix_b = matrix_a;
     return 0;
 }
