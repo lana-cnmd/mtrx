@@ -32,13 +32,12 @@ S21Matrix::S21Matrix(const S21Matrix &other)
 
 S21Matrix::~S21Matrix()
 {
-    for (size_t i = 0; i < rows_; ++i)
+    if (matrix_ != nullptr)
     {
-        delete[] matrix_[i];
+        for (size_t i = 0; i < rows_; ++i)
+        {
+            delete[] matrix_[i];
+        }
+        delete[] matrix_;
     }
-    delete matrix_;
 }
-
-// S21Matrix&operator=(const S21Matrix &other)
-// {
-// }
