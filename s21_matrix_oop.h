@@ -22,9 +22,9 @@ public:
     // double Determinant();
     // S21Matrix InverseMatrix();
 
-    S21Matrix &operator=(S21Matrix &other);
-    bool operator==(const S21Matrix &other) const;
-    bool operator!=(const S21Matrix &other) const;
+    S21Matrix &operator=(S21Matrix &other);  // other меняется?
+    bool operator==(const S21Matrix &other) const; // кидает исключение?
+    bool operator!=(const S21Matrix &other) const; // кидает исключение?
     double &operator()(size_t i, size_t j);
 
 private:
