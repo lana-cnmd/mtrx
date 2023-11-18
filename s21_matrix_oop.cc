@@ -76,7 +76,7 @@ bool S21Matrix::EqMatrix(const S21Matrix &other) const
     {
         for (size_t j = 0; j < cols_; ++j)
         {
-            if (fabs(matrix_[i][j] - other.matrix_[i][j] > 1.e-7))
+            if (fabs(matrix_[i][j] - other.matrix_[i][j] > 1.e-7))  // if (matrix_[i][j] != other.matrix[i][j])
                 return false;
         }
     }
