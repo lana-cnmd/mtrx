@@ -5,7 +5,7 @@ FILES = s21_matrix_oop.cc
 GTEST = -lgtest -lgtest_main
 GCOV = -fprofile-arcs -ftest-coverage -fPIC -pthread
 
-all: test
+all: gcov_report
 
 test: clean 
 	g++ ${FLAGS} tests_s21_matrix.cc -c 

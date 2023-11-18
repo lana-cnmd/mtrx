@@ -2,9 +2,8 @@
 
 S21Matrix::S21Matrix() : rows_(0), cols_(0), matrix_(nullptr) {}
 
-S21Matrix::S21Matrix(size_t rows, size_t cols) : rows_(rows), cols_(cols) // тут выделяешь память в теле конструктора
+S21Matrix::S21Matrix(size_t rows, size_t cols) : rows_(rows), cols_(cols), matrix_(new double *[rows])
 {
-    matrix_ = new double *[rows];
     for (size_t i = 0; i < rows; ++i)
     {
         matrix_[i] = new double[cols]();
@@ -12,7 +11,7 @@ S21Matrix::S21Matrix(size_t rows, size_t cols) : rows_(rows), cols_(cols) // т�
 }
 
 S21Matrix::S21Matrix(const S21Matrix &other)
-    : rows_(other.rows_), cols_(other.cols_), matrix_(new double *[other.rows_]) // тут выделяешь память в списке инициализации
+    : rows_(other.rows_), cols_(other.cols_), matrix_(new double *[other.rows_])
 {
     for (size_t i = 0; i < other.rows_; ++i)
     {
@@ -47,9 +46,41 @@ S21Matrix &S21Matrix::operator=(S21Matrix &other)
     // S21Matrix copy = other;
     // std::swap(copy);
     // return *this;
-    std::swap(other.rows_, rows_);
-    std::swap(other.cols_, cols_);
-    std::swap(other.matrix_, matrix_);
+    // std::swap(other.rows_, rows_);
+    // std::swap(other.cols_, cols_);
+    // std::swap(other.matrix_, matrix_);
+    // return *this;
+
+    if (rows_ != other.rows_ || cols_ != other.cols_)
+        throw "different matrix dimensions";
+
+    if (&other == this)
+        return *this;
+
+    if (matrix_ != nullptr)
+    {
+        for (size_t i = 0; i < rows_; ++i)
+        {
+            delete[] matrix_[i];
+        }
+        delete[] matrix_;
+    }
+
+    rows_ = other.rows_;
+    cols_ = other.cols_;
+    matrix_ = new double *[rows_];
+    for (size_t i = 0; i < rows_; ++i)
+    {
+        matrix_[i] = new double[cols_];
+    }
+
+    for (size_t i = 0; i < rows_; ++i)
+    {
+        for (size_t j = 0; j < cols_; ++j)
+        {
+            matrix_[i][j] = other.matrix_[i][j];
+        }
+    }
     return *this;
 }
 
@@ -76,9 +107,36 @@ bool S21Matrix::EqMatrix(const S21Matrix &other) const
     {
         for (size_t j = 0; j < cols_; ++j)
         {
-            if (fabs(matrix_[i][j] - other.matrix_[i][j] > 1.e-7))  // if (matrix_[i][j] != other.matrix[i][j])
+            // if (matrix_[i][j] != other.matrix_[i][j])
+            if (fabs(matrix_[i][j] - other.matrix_[i][j] > 1.e-7))
                 return false;
         }
     }
     return true;
+}
+
+void S21Matrix::SumMatrix(const S21Matrix &other)
+{
+    if (rows_ != other.rows_ || cols_ != other.cols_)
+        throw "different matrix dimensions";
+    for (size_t i = 0; i < rows_; ++i)
+    {
+        for (size_t j = 0; j < cols_; ++j)
+        {
+            matrix_[i][j] = matrix_[i][j] + other.matrix_[i][j];
+        }
+    }
+}
+
+void S21Matrix::SubMatrix(const S21Matrix &other)
+{
+    if (rows_ != other.rows_ || cols_ != other.cols_)
+        throw "different matrix dimensions";
+    for (size_t i = 0; i < rows_; ++i)
+    {
+        for (size_t j = 0; j < cols_; ++j)
+        {
+            matrix_[i][j] = matrix_[i][j] - other.matrix_[i][j];
+        }
+    }
 }
