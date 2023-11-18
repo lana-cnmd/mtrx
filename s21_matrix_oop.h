@@ -27,6 +27,10 @@ public:
     bool operator==(const S21Matrix &other) const; // кидает исключение?
     bool operator!=(const S21Matrix &other) const; // кидает исключение?
     double &operator()(size_t i, size_t j);
+    S21Matrix operator+(const S21Matrix &other) const;
+    S21Matrix &operator+=(const S21Matrix &other);
+    S21Matrix operator-(const S21Matrix &other) const;
+    S21Matrix &operator-=(const S21Matrix &other);
 
 private:
     size_t rows_;

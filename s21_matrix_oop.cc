@@ -99,6 +99,30 @@ double &S21Matrix::operator()(size_t i, size_t j)
     return matrix_[i][j];
 }
 
+S21Matrix S21Matrix::operator+(const S21Matrix &other) const
+{
+    S21Matrix sum = *this;
+    return sum += other;
+}
+
+S21Matrix &S21Matrix::operator+=(const S21Matrix &other)
+{
+    SumMatrix(other);
+    return *this;
+}
+
+S21Matrix S21Matrix::operator-(const S21Matrix &other) const
+{
+    S21Matrix sub = *this;
+    return sub -= other;
+}
+
+S21Matrix &S21Matrix::operator-=(const S21Matrix &other)
+{
+    SubMatrix(other);
+    return *this;
+}
+
 bool S21Matrix::EqMatrix(const S21Matrix &other) const
 {
     if (rows_ != other.rows_ || cols_ != other.cols_)

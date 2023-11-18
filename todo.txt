@@ -4,11 +4,11 @@
 +    4. operator()
 +    5. makefile +std +gcov_report
 +    6. sumMatrix
-    7. operator+
-    8. operator+=
++    7. operator+
++    8. operator+=
 +    9. subMatirx
-    10. operator-
-    11. oeprator-=
++    10. operator-
++    11. oeprator-=
 
     12. mulMatirx
     13. operator*(matrix)
