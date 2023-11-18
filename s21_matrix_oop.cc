@@ -180,15 +180,16 @@ void S21Matrix::MulMatrix(const S21Matrix &other)
 {
     if (cols_ != other.rows_)
         throw "the number of columns of the first matrix is not equal to the number of rows of the second matrix";
+    S21Matrix result(rows_, other.cols_);
     for (size_t i = 0; i < rows_; ++i)
     {
         for (size_t j = 0; j < other.cols_; ++j)
         {
-            matrix_[i][j] = 0;
             for (size_t k = 0; k < cols_; ++k)
             {
-                matrix_[i][j] += matrix_[i][k] * other.matrix_[k][j];
+                result.matrix_[i][j] += matrix_[i][k] * other.matrix_[k][j];
             }
         }
     }
+    *this = result;
 }

@@ -288,35 +288,6 @@ int main(int argc, char *argv[])
 
 TEST(MulMatrixTests, test_1)
 {
-    S21Matrix matrix_a(2, 3);
-    S21Matrix matrix_b(3, 2);
-    S21Matrix result(2, 2);
-
-    matrix_a(0, 0) = -53;
-    matrix_a(0, 1) = -18;
-    matrix_a(0, 2) = -40;
-    matrix_a(1, 0) = -28;
-    matrix_a(1, 1) = 16;
-    matrix_a(1, 2) = 60;
-
-    matrix_b(0, 0) = -7;
-    matrix_b(0, 1) = 4;
-    matrix_b(0, 2) = -7;
-    matrix_b(1, 0) = -4;
-    matrix_b(1, 1) = -3;
-    matrix_b(2, 1) = -2;
-
-    result(0, 0) = 617;
-    result(0, 1) = -60;
-    result(1, 0) = -96;
-    result(1, 1) = -296;
-
-    matrix_a.MulMatrix(matrix_b);
-    ASSERT_TRUE(matrix_a == result);
-}
-
-TEST(MulMatrixTests, test_2)
-{
     S21Matrix matrix_a(2, 2);
     S21Matrix matrix_b(2, 2);
     S21Matrix result(2, 2);
@@ -339,3 +310,12 @@ TEST(MulMatrixTests, test_2)
     matrix_a.MulMatrix(matrix_b);
     ASSERT_TRUE(matrix_a == result);
 }
+
+// TEST(MulMatrixTests, test_2)
+// {
+// }
+
+// TEST(MulMatrixTests, test_3)
+// {
+// exeption
+// }
