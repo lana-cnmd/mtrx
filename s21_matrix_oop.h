@@ -23,18 +23,21 @@ public:
     // double Determinant();
     // S21Matrix InverseMatrix();
 
-    S21Matrix &operator=(S21Matrix &other);        // other меняется?
-    bool operator==(const S21Matrix &other) const; // кидает исключение?
+    size_t GetRows() const;
+    void SetRows(size_t rows);
+
+    S21Matrix &operator=(S21Matrix &other);        // net // other меняется?
+    bool operator==(const S21Matrix &other) const; // net
     bool operator!=(const S21Matrix &other) const; // кидает исключение?
-    double &operator()(size_t i, size_t j);
-    S21Matrix operator+(const S21Matrix &other) const;
-    S21Matrix &operator+=(const S21Matrix &other);
-    S21Matrix operator-(const S21Matrix &other) const;
-    S21Matrix &operator-=(const S21Matrix &other);
-    S21Matrix operator*(const double num);
-    S21Matrix operator*(const S21Matrix &other) const;
-    S21Matrix &operator*=(const double num);
-    S21Matrix &operator*=(const S21Matrix &other);
+    double &operator()(size_t i, size_t j); //da
+    S21Matrix operator+(const S21Matrix &other) const; //da
+    S21Matrix &operator+=(const S21Matrix &other); //da
+    S21Matrix operator-(const S21Matrix &other) const; //da
+    S21Matrix &operator-=(const S21Matrix &other); //da
+    S21Matrix operator*(const double num); //?
+    S21Matrix operator*(const S21Matrix &other) const; //da
+    S21Matrix &operator*=(const double num); //?
+    S21Matrix &operator*=(const S21Matrix &other); //da
 
 private:
     size_t rows_;

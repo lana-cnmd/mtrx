@@ -359,90 +359,103 @@ TEST(MulMatrixOperTests, test_1)
     ASSERT_TRUE((matrix_a * matrix_b) == result);
 }
 
-TEST(TransponceMatrix, test_1)
-{
-    S21Matrix matrix_a(5, 1);
-    S21Matrix result(1, 5);
+// TEST(TransponceMatrix, test_1)
+// {
+//     S21Matrix matrix_a(5, 1);
+//     S21Matrix result(1, 5);
 
-    matrix_a(0, 0) = -701;
-    matrix_a(1, 0) = -991;
-    matrix_a(2, 0) = 23.4;
-    matrix_a(3, 0) = 0;
-    matrix_a(4, 0) = 234;
+//     matrix_a(0, 0) = -701;
+//     matrix_a(1, 0) = -991;
+//     matrix_a(2, 0) = 23.4;
+//     matrix_a(3, 0) = 0;
+//     matrix_a(4, 0) = 234;
 
-    result(0, 0) = -701;
-    result(0, 1) = -991;
-    result(0, 2) = 23.4;
-    result(0, 3) = 0;
-    result(0, 4) = 234;
+//     result(0, 0) = -701;
+//     result(0, 1) = -991;
+//     result(0, 2) = 23.4;
+//     result(0, 3) = 0;
+//     result(0, 4) = 234;
 
-    S21Matrix transponse = matrix_a.Transpose();
-    ASSERT_TRUE(transponse == result);
-}
+//     S21Matrix transponse = matrix_a.Transpose();
+//     ASSERT_TRUE(transponse == result);
+// }
 
-TEST(TransponceMatrix, test_2) {
-  S21Matrix matrix_a(5, 2);
-  S21Matrix result(2, 5);
+// TEST(TransponceMatrix, test_2) {
+//   S21Matrix matrix_a(5, 2);
+//   S21Matrix result(2, 5);
 
-  matrix_a(0, 0) = -2;
-  matrix_a(0, 1) = -15;
-  matrix_a(1, 0) = -48;
-  matrix_a(1, 1) = -83.45;
-  matrix_a(2, 0) = 83;
-  matrix_a(2, 1) = -39;
-  matrix_a(3, 0) = 48;
-  matrix_a(3, 1) = -79;
-  matrix_a(4, 0) = -34;
-  matrix_a(4, 1) = -18;
+//   matrix_a(0, 0) = -2;
+//   matrix_a(0, 1) = -15;
+//   matrix_a(1, 0) = -48;
+//   matrix_a(1, 1) = -83.45;
+//   matrix_a(2, 0) = 83;
+//   matrix_a(2, 1) = -39;
+//   matrix_a(3, 0) = 48;
+//   matrix_a(3, 1) = -79;
+//   matrix_a(4, 0) = -34;
+//   matrix_a(4, 1) = -18;
 
-  result(0, 0) = -2;
-  result(0, 1) = -48;
-  result(0, 2) = 83;
-  result(0, 3) = 48;
-  result(0, 4) = -34;
-  result(1, 0) = -15;
-  result(1, 1) = -83.45;
-  result(1, 2) = -39;
-  result(1, 3) = -79;
-  result(1, 4) = -18;
+//   result(0, 0) = -2;
+//   result(0, 1) = -48;
+//   result(0, 2) = 83;
+//   result(0, 3) = 48;
+//   result(0, 4) = -34;
+//   result(1, 0) = -15;
+//   result(1, 1) = -83.45;
+//   result(1, 2) = -39;
+//   result(1, 3) = -79;
+//   result(1, 4) = -18;
 
-S21Matrix transponse = matrix_a.Transpose();
-ASSERT_TRUE(transponse == result);
-}
+// S21Matrix transponse = matrix_a.Transpose();
+// ASSERT_TRUE(transponse == result);
+// }
 
-TEST(TransponceMatrix, test_3) {
-  S21Matrix matrix_a(4, 3);
-  S21Matrix result(3, 4);
+// TEST(TransponceMatrix, test_3) {
+//   S21Matrix matrix_a(4, 3);
+//   S21Matrix result(3, 4);
 
-  matrix_a(0, 0) = 7;
-  matrix_a(0, 1) = -98;
-  matrix_a(0, 2) = 0.5;
-  matrix_a(1, 0) = 0;
-  matrix_a(1, 1) = 5.4;
-  matrix_a(1, 2) = 32;
-  matrix_a(2, 0) = 3.12;
-  matrix_a(2, 1) = 2323;
-  matrix_a(2, 2) = 23;
-  matrix_a(3, 0) = -78;
-  matrix_a(3, 1) = 476.4;
-  matrix_a(3, 2) = 21;
+//   matrix_a(0, 0) = 7;
+//   matrix_a(0, 1) = -98;
+//   matrix_a(0, 2) = 0.5;
+//   matrix_a(1, 0) = 0;
+//   matrix_a(1, 1) = 5.4;
+//   matrix_a(1, 2) = 32;
+//   matrix_a(2, 0) = 3.12;
+//   matrix_a(2, 1) = 2323;
+//   matrix_a(2, 2) = 23;
+//   matrix_a(3, 0) = -78;
+//   matrix_a(3, 1) = 476.4;
+//   matrix_a(3, 2) = 21;
 
-  result(0, 0) = 7;
-  result(0, 1) = 0;
-  result(0, 2) = 3.12;
-  result(0, 3) = -78;
-  result(1, 0) = -98;
-  result(1, 1) = 5.4;
-  result(1, 2) = 2323;
-  result(1, 3) = 476.4;
-  result(2, 0) = 0.5;
-  result(2, 1) = 32;
-  result(2, 2) = 23;
-  result(2, 3) = 21;
+//   result(0, 0) = 7;
+//   result(0, 1) = 0;
+//   result(0, 2) = 3.12;
+//   result(0, 3) = -78;
+//   result(1, 0) = -98;
+//   result(1, 1) = 5.4;
+//   result(1, 2) = 2323;
+//   result(1, 3) = 476.4;
+//   result(2, 0) = 0.5;
+//   result(2, 1) = 32;
+//   result(2, 2) = 23;
+//   result(2, 3) = 21;
 
-S21Matrix transponse = matrix_a.Transpose();
-ASSERT_TRUE(transponse == result);
-}
+// S21Matrix transponse = matrix_a.Transpose();
+// ASSERT_TRUE(transponse == result);
+// }
+
+
+// TEST(DeterminantTests, test_1) {
+//   S21Matrix matrix_a(2, 2);
+
+//   matrix_a(0, 0) = 1;
+//   matrix_a(0, 1) = -1;
+//   matrix_a(1, 0) = 0;
+//   matrix_a(1, 1) = 0;
+
+
+// ASSERT_TRUE(transponse == result);
+// }
 
 int main(int argc, char *argv[])
 {

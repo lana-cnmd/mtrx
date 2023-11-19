@@ -15,3 +15,10 @@
 +    14. operator*(number)
 +    15. operator*=(matrix)
 +    16. operator*=(number)
+
+    17. determinant
+    18. calc complements
+    19. inverse matrix
+    ?. move constructor
+    getrows get cols
+    set rows set cols_

@@ -59,6 +59,7 @@ bool S21Matrix::EqMatrix(const S21Matrix &other) const
 
 S21Matrix &S21Matrix::operator=(S21Matrix &other)
 {
+
     // S21Matrix copy = other;
     // std::swap(copy);
     // return *this;
@@ -222,4 +223,16 @@ S21Matrix S21Matrix::Transpose() {
         }
     }
     return result;
+}
+
+// double S21Matrix::Determinant(){
+    
+// }
+
+size_t S21Matrix::GetRows() const {
+    return rows_;
+}
+
+void S21Matrix::SetRows(size_t rows) {
+    //проверить на размер? если размер больше выделить память
 }
