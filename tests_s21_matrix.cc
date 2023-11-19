@@ -28,7 +28,7 @@ TEST(EqualTests, test_2)
 
 TEST(EqualTests, test_3)
 {
-    S21Matrix matrix_a(2, 2); // не понял теста
+    S21Matrix matrix_a(2, 2); 
     matrix_a(0, 0) = 2;
     matrix_a(0, 1) = 3.2;
     matrix_a(1, 0) = 0;
@@ -280,6 +280,25 @@ TEST(MulNumberTests, test_1)
     ASSERT_TRUE(matrix_a == result);
 }
 
+TEST(MulNumberOperTests, test_1)
+{
+    const double num = 100.0;
+
+    S21Matrix matrix_a(2, 2);
+    matrix_a(0, 0) = 1;
+    matrix_a(0, 1) = -1;
+    matrix_a(1, 0) = 234.4567;
+    matrix_a(1, 1) = -456543.3;
+
+    S21Matrix result(2, 2);
+    result(0, 0) = 100;
+    result(0, 1) = -100;
+    result(1, 0) = 23445.67;
+    result(1, 1) = -45654330;
+
+    ASSERT_TRUE((matrix_a * num) == result);
+}
+
 int main(int argc, char *argv[])
 {
     ::testing::InitGoogleTest(&argc, argv);
@@ -320,3 +339,27 @@ TEST(MulMatrixTests, test_1)
 // {
 // exeption
 // }
+
+TEST(MulMatrixOperTests, test_1)
+{
+    S21Matrix matrix_a(2, 2);
+    S21Matrix matrix_b(2, 2);
+    S21Matrix result(2, 2);
+
+    matrix_a(0, 0) = 3;
+    matrix_a(0, 1) = 2;
+    matrix_a(1, 0) = -6.6;
+    matrix_a(1, 1) = 0;
+
+    matrix_b(0, 0) = -7;
+    matrix_b(0, 1) = 0;
+    matrix_b(1, 0) = -3.5;
+    matrix_b(1, 1) = 2;
+
+    result(0, 0) = -28;
+    result(0, 1) = 4;
+    result(1, 0) = 46.2;
+    result(1, 1) = 0;
+
+    ASSERT_TRUE((matrix_a * matrix_b) == result);
+}

@@ -41,6 +41,22 @@ S21Matrix::~S21Matrix()
     }
 }
 
+bool S21Matrix::EqMatrix(const S21Matrix &other) const
+{
+    if (rows_ != other.rows_ || cols_ != other.cols_)
+        return false;
+    for (size_t i = 0; i < rows_; ++i)
+    {
+        for (size_t j = 0; j < cols_; ++j)
+        {
+            // if (matrix_[i][j] != other.matrix_[i][j])
+            if (fabs(matrix_[i][j] - other.matrix_[i][j] > 1.e-7))
+                return false;
+        }
+    }
+    return true;
+}
+
 S21Matrix &S21Matrix::operator=(S21Matrix &other)
 {
     // S21Matrix copy = other;
@@ -99,46 +115,6 @@ double &S21Matrix::operator()(size_t i, size_t j)
     return matrix_[i][j];
 }
 
-S21Matrix S21Matrix::operator+(const S21Matrix &other) const
-{
-    S21Matrix sum = *this;
-    return sum += other;
-}
-
-S21Matrix &S21Matrix::operator+=(const S21Matrix &other)
-{
-    SumMatrix(other);
-    return *this;
-}
-
-S21Matrix S21Matrix::operator-(const S21Matrix &other) const
-{
-    S21Matrix sub = *this;
-    return sub -= other;
-}
-
-S21Matrix &S21Matrix::operator-=(const S21Matrix &other)
-{
-    SubMatrix(other);
-    return *this;
-}
-
-bool S21Matrix::EqMatrix(const S21Matrix &other) const
-{
-    if (rows_ != other.rows_ || cols_ != other.cols_)
-        return false;
-    for (size_t i = 0; i < rows_; ++i)
-    {
-        for (size_t j = 0; j < cols_; ++j)
-        {
-            // if (matrix_[i][j] != other.matrix_[i][j])
-            if (fabs(matrix_[i][j] - other.matrix_[i][j] > 1.e-7))
-                return false;
-        }
-    }
-    return true;
-}
-
 void S21Matrix::SumMatrix(const S21Matrix &other)
 {
     if (rows_ != other.rows_ || cols_ != other.cols_)
@@ -150,6 +126,18 @@ void S21Matrix::SumMatrix(const S21Matrix &other)
             matrix_[i][j] = matrix_[i][j] + other.matrix_[i][j];
         }
     }
+}
+
+S21Matrix S21Matrix::operator+(const S21Matrix &other) const
+{
+    S21Matrix sum = *this;
+    return sum += other;
+}
+
+S21Matrix &S21Matrix::operator+=(const S21Matrix &other)
+{
+    SumMatrix(other);
+    return *this;
 }
 
 void S21Matrix::SubMatrix(const S21Matrix &other)
@@ -165,6 +153,18 @@ void S21Matrix::SubMatrix(const S21Matrix &other)
     }
 }
 
+S21Matrix S21Matrix::operator-(const S21Matrix &other) const
+{
+    S21Matrix sub = *this;
+    return sub -= other;
+}
+
+S21Matrix &S21Matrix::operator-=(const S21Matrix &other)
+{
+    SubMatrix(other);
+    return *this;
+}
+
 void S21Matrix::MulNumber(const double num)
 {
     for (size_t i = 0; i < rows_; ++i)
@@ -174,6 +174,16 @@ void S21Matrix::MulNumber(const double num)
             matrix_[i][j] = matrix_[i][j] * num;
         }
     }
+}
+
+S21Matrix S21Matrix::operator*(const double num) {
+    S21Matrix mul = *this;
+    return mul *= num;
+}
+
+S21Matrix &S21Matrix::operator*=(const double num) {
+    MulNumber(num);
+    return *this;
 }
 
 void S21Matrix::MulMatrix(const S21Matrix &other)
@@ -192,4 +202,14 @@ void S21Matrix::MulMatrix(const S21Matrix &other)
         }
     }
     *this = result;
+}
+
+S21Matrix S21Matrix::operator*(const S21Matrix &other) const {
+    S21Matrix mul = *this;
+    return mul *= other;
+}
+
+S21Matrix &S21Matrix::operator*=(const S21Matrix &other) {
+    MulMatrix(other);
+    return *this;
 }

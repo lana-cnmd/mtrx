@@ -10,6 +10,8 @@
 +    10. operator-
 +    11. oeprator-=
 
-    12. mulMatirx
-    13. operator*(matrix)
-    14. operator*(number)
++    12. mulMatirx
++    13. operator*(matrix)
++    14. operator*(number)
++    15. operator*=(matrix)
++    16. operator*=(number)
