@@ -13,31 +13,33 @@ public:
     // S21Matrix(S21Matrix&& other);
     ~S21Matrix();
 
-    bool EqMatrix(const S21Matrix &other) const;
-    void SumMatrix(const S21Matrix &other);
-    void SubMatrix(const S21Matrix &other);
-    void MulNumber(const double num);
-    void MulMatrix(const S21Matrix &other);
-    S21Matrix Transpose();
-    // S21Matrix CalcComplements();
-    // double Determinant();
-    // S21Matrix InverseMatrix();
+    bool EqMatrix(const S21Matrix &other) const; // net
+    void SumMatrix(const S21Matrix &other);      // different matrix dimensions
+    void SubMatrix(const S21Matrix &other);      // different matrix dimensions
+    void MulNumber(const double num);            // net
+    void MulMatrix(const S21Matrix &other);      // the number of columns of the first matrix is not equal to the number of rows of the second matrix
+    S21Matrix Transpose();                       // net
+    // S21Matrix CalcComplements(); //the matrix is not square
+    // double Determinant(); //the matrix is not square
+    // S21Matrix InverseMatrix(); //matrix determinant is 0
 
     size_t GetRows() const;
-    void SetRows(size_t rows);
+    size_t GetCols() const;
+    void SetRows(size_t newValue);
+    void SetCols(size_t newValue);
 
-    S21Matrix &operator=(S21Matrix &other);        // net // other меняется?
+    S21Matrix &operator=(const S21Matrix &other);  // net
     bool operator==(const S21Matrix &other) const; // net
     bool operator!=(const S21Matrix &other) const; // кидает исключение?
-    double &operator()(size_t i, size_t j); //da
-    S21Matrix operator+(const S21Matrix &other) const; //da
-    S21Matrix &operator+=(const S21Matrix &other); //da
-    S21Matrix operator-(const S21Matrix &other) const; //da
-    S21Matrix &operator-=(const S21Matrix &other); //da
-    S21Matrix operator*(const double num); //?
-    S21Matrix operator*(const S21Matrix &other) const; //da
-    S21Matrix &operator*=(const double num); //?
-    S21Matrix &operator*=(const S21Matrix &other); //da
+    double &operator()(size_t i, size_t j);
+    S21Matrix operator+(const S21Matrix &other) const; // different matrix dimensions
+    S21Matrix &operator+=(const S21Matrix &other);     // different matrix dimensions
+    S21Matrix operator-(const S21Matrix &other) const; // different matrix dimensions
+    S21Matrix &operator-=(const S21Matrix &other);     // different matrix dimensions
+    S21Matrix operator*(const double num);             //?
+    S21Matrix operator*(const S21Matrix &other) const; // the number of columns of the first matrix does not equal the number of rows of the second matrix
+    S21Matrix &operator*=(const double num);           //?
+    S21Matrix &operator*=(const S21Matrix &other);     // the number of columns of the first matrix does not equal the number of rows of the second matrix
 
 private:
     size_t rows_;

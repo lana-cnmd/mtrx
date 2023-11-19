@@ -57,7 +57,7 @@ bool S21Matrix::EqMatrix(const S21Matrix &other) const
     return true;
 }
 
-S21Matrix &S21Matrix::operator=(S21Matrix &other)
+S21Matrix &S21Matrix::operator=(const S21Matrix &other)
 {
 
     // S21Matrix copy = other;
@@ -113,6 +113,8 @@ bool S21Matrix::operator!=(const S21Matrix &other) const
 
 double &S21Matrix::operator()(size_t i, size_t j)
 {
+    if (i < 0 || j < 0 || i >= rows_ || j >= cols_)
+        throw "index is outside the matrix";
     return matrix_[i][j];
 }
 
@@ -177,12 +179,14 @@ void S21Matrix::MulNumber(const double num)
     }
 }
 
-S21Matrix S21Matrix::operator*(const double num) {
+S21Matrix S21Matrix::operator*(const double num)
+{
     S21Matrix mul = *this;
     return mul *= num;
 }
 
-S21Matrix &S21Matrix::operator*=(const double num) {
+S21Matrix &S21Matrix::operator*=(const double num)
+{
     MulNumber(num);
     return *this;
 }
@@ -205,20 +209,25 @@ void S21Matrix::MulMatrix(const S21Matrix &other)
     *this = result;
 }
 
-S21Matrix S21Matrix::operator*(const S21Matrix &other) const {
+S21Matrix S21Matrix::operator*(const S21Matrix &other) const
+{
     S21Matrix mul = *this;
     return mul *= other;
 }
 
-S21Matrix &S21Matrix::operator*=(const S21Matrix &other) {
+S21Matrix &S21Matrix::operator*=(const S21Matrix &other)
+{
     MulMatrix(other);
     return *this;
 }
 
-S21Matrix S21Matrix::Transpose() {
+S21Matrix S21Matrix::Transpose()
+{
     S21Matrix result(rows_, cols_);
-    for (size_t i = 0; i < rows_; ++i) {
-        for (size_t j = 0; j < cols_; ++j) {
+    for (size_t i = 0; i < rows_; ++i)
+    {
+        for (size_t j = 0; j < cols_; ++j)
+        {
             result.matrix_[j][i] = matrix_[i][j];
         }
     }
@@ -226,13 +235,41 @@ S21Matrix S21Matrix::Transpose() {
 }
 
 // double S21Matrix::Determinant(){
-    
+
 // }
 
-size_t S21Matrix::GetRows() const {
+size_t S21Matrix::GetRows() const
+{
     return rows_;
 }
-
-void S21Matrix::SetRows(size_t rows) {
-    //проверить на размер? если размер больше выделить память
+size_t S21Matrix::GetCols() const
+{
+    return cols_;
 }
+
+// void S21Matrix::SetRows(size_t newValue)
+// {
+//     // проверить на размер? если размер больше выделить память
+//     if (newValue <= 0)
+//         throw "negative or null value";
+//     if (newValue > rows_)
+//     {
+//         matrix_ = new double *[newValue];
+//     }
+//     rows_ = newValue;
+// }
+
+// void S21Matrix::SetCols(size_t newValue)
+// {
+//     // проверить на размер? если размер больше выделить память
+//     if (newValue <= 0)
+//         throw "negative or null value";
+//     if (newValue > cols_)
+//     {
+//         for (size_t i = 0; i < rows_; ++i)
+//         {
+//             this->matrix_[i] = new double[newValue]();
+//         }
+//     }
+//     cols_ = newValue;
+// }

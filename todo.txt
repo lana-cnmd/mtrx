@@ -1,24 +1,5 @@
-+    1. EqMatrix
-+    2. operator==
-+    3. operator!=
-+    4. operator()
-+    5. makefile +std +gcov_report
-+    6. sumMatrix
-+    7. operator+
-+    8. operator+=
-+    9. subMatirx
-+    10. operator-
-+    11. oeprator-=
-
-+    12. mulMatirx
-+    13. operator*(matrix)
-+    14. operator*(number)
-+    15. operator*=(matrix)
-+    16. operator*=(number)
-
     17. determinant
     18. calc complements
     19. inverse matrix
     ?. move constructor
-    getrows get cols
-    set rows set cols_
++    set rows set cols_(bad alloc)
