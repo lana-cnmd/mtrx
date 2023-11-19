@@ -213,3 +213,13 @@ S21Matrix &S21Matrix::operator*=(const S21Matrix &other) {
     MulMatrix(other);
     return *this;
 }
+
+S21Matrix S21Matrix::Transpose() {
+    S21Matrix result(rows_, cols_);
+    for (size_t i = 0; i < rows_; ++i) {
+        for (size_t j = 0; j < cols_; ++j) {
+            result.matrix_[j][i] = matrix_[i][j];
+        }
+    }
+    return result;
+}
