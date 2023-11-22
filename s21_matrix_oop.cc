@@ -27,7 +27,13 @@ S21Matrix::S21Matrix(const S21Matrix &other)
     }
 }
 
-// S21Matrix::S21Matrix(S21Matrix&& other) : {}
+S21Matrix::S21Matrix(S21Matrix &&other)
+    : rows_(other.rows_), cols_(other.cols_), matrix_(other.matrix_)
+{
+    other.rows_ = 0;
+    other.cols_ = 0;
+    other.matrix_ = nullptr;
+}
 
 S21Matrix::~S21Matrix()
 {
@@ -223,7 +229,7 @@ S21Matrix &S21Matrix::operator*=(const S21Matrix &other)
 
 S21Matrix S21Matrix::Transpose()
 {
-    S21Matrix result(rows_, cols_);
+    S21Matrix result(cols_, rows_);
     for (size_t i = 0; i < rows_; ++i)
     {
         for (size_t j = 0; j < cols_; ++j)
@@ -250,11 +256,21 @@ size_t S21Matrix::GetCols() const
 // void S21Matrix::SetRows(size_t newValue)
 // {
 //     // проверить на размер? если размер больше выделить память
-//     if (newValue <= 0)
+//     if (newValue == 0)
 //         throw "negative or null value";
 //     if (newValue > rows_)
 //     {
+//         for(size_t i = 0; i < newValue; ++i) {
+//             for (size_t j = 0; j <)
+//         }
 //         matrix_ = new double *[newValue];
+//     }
+//     if (newValue < rows_) {
+//         for(size_t i = 0; i < newValue; ++i) {
+//             for (size_t j = 0; j < cols_; ++j) {
+
+//             }
+//         }
 //     }
 //     rows_ = newValue;
 // }
@@ -262,7 +278,7 @@ size_t S21Matrix::GetCols() const
 // void S21Matrix::SetCols(size_t newValue)
 // {
 //     // проверить на размер? если размер больше выделить память
-//     if (newValue <= 0)
+//     if (newValue == 0)
 //         throw "negative or null value";
 //     if (newValue > cols_)
 //     {

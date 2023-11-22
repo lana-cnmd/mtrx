@@ -10,7 +10,7 @@ public:
     S21Matrix();
     S21Matrix(size_t rows, size_t cols);
     S21Matrix(const S21Matrix &other);
-    // S21Matrix(S21Matrix&& other);
+    S21Matrix(S21Matrix &&other);
     ~S21Matrix();
 
     bool EqMatrix(const S21Matrix &other) const; // net
