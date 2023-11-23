@@ -242,7 +242,7 @@ S21Matrix S21Matrix::Transpose()
 
 double S21Matrix::Determinant(){
     if(rows_ != cols_)
-        throw "Incorrect matrix";
+        throw "the matrix is not square";
     S21Matrix tmp = *this; //
     size_t currentStart = 0;
     double first = 0;
@@ -273,6 +273,35 @@ double S21Matrix::Determinant(){
         }
     }
     return det;
+}
+
+void S21Matrix::CreateMinor(size_t rowRemove, size_t colRemove, S21Matrix &other)
+{
+    size_t row = 0;
+    for( size_t i = 0; i < other.rows_; ++i) {
+        size_t col = 0;
+        for (size_t j = 0; j < other.cols_; ++j) { 
+            if (i != rowRemove && j != colRemove) {
+                matrix_[row][col] = other.matrix_[i][j];
+                col++;
+            }
+        }
+        col = 0;
+        if (i != rowRemove) row++;
+    }
+}
+
+S21Matrix S21Matrix::CalcComplements() {
+    if(rows_ != cols_)
+        throw "the matrix is not square";      
+    S21Matrix tmp(rows_ - 1, cols_ - 1);
+    for(size_t i = 0; i < rows_; ++i) {
+        for(size_t j = 0; j < cols_; ++j) { 
+            tmp.CreateMinor(i, j, *this);
+            tmp.matrix_[i][j] = tmp.Determinant() * pow(-1, i + j);
+        }
+    }
+    return tmp;
 }
 
 size_t S21Matrix::GetRows() const

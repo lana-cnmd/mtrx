@@ -19,8 +19,9 @@ public:
     void MulNumber(const double num);            // net
     void MulMatrix(const S21Matrix &other);      // the number of columns of the first matrix is not equal to the number of rows of the second matrix
     S21Matrix Transpose();                       // net
-    // S21Matrix CalcComplements(); //the matrix is not square
-    double Determinant(); //the matrix is not square
+    double Determinant(); 
+    S21Matrix CalcComplements();
+    void CreateMinor(size_t rowRemove, size_t colRemove, S21Matrix &other);
     // S21Matrix InverseMatrix(); //matrix determinant is 0
 
     size_t GetRows() const;
