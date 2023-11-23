@@ -581,16 +581,49 @@ TEST(TransponceMatrix, test_3)
     ASSERT_TRUE(transponse == result);
 }
 
-// TEST(DeterminantTests, test_1) {
-//   S21Matrix matrix_a(2, 2);
+TEST(DeterminantTests, test_1) {
+  S21Matrix matrix_a(3, 3);
 
-//   matrix_a(0, 0) = 1;
-//   matrix_a(0, 1) = -1;
-//   matrix_a(1, 0) = 0;
-//   matrix_a(1, 1) = 0;
+  matrix_a(0, 0) = 0;
+    matrix_a(0, 1) = 5;
+    matrix_a(0, 2) = 7;
+    matrix_a(1, 0) = 6;
+    matrix_a(1, 1) = 3;
+    matrix_a(1, 2) = 4;
+    matrix_a(2, 0) = 5;
+    matrix_a(2, 1) = -2;
+    matrix_a(2, 2) = -3;
 
-// ASSERT_TRUE(transponse == result);
-// }
+  double det = matrix_a.Determinant();
+  double result = 1;
+
+ASSERT_EQ(det, result);
+}
+
+TEST(DeterminantTests, test_2) {
+  S21Matrix matrix_a(3, 3);
+
+  matrix_a(0, 0) = 1;
+    matrix_a(0, 1) = 5;
+    matrix_a(0, 2) = 7;
+    matrix_a(1, 0) = 6;
+    matrix_a(1, 1) = 3;
+    matrix_a(1, 2) = 4;
+    matrix_a(2, 0) = 5;
+    matrix_a(2, 1) = -2;
+    matrix_a(2, 2) = -3;
+
+  double det = matrix_a.Determinant();
+  double result = 0;
+
+ASSERT_EQ(det, result);
+}
+
+TEST(DeterminantTests, test_3) {
+  S21Matrix matrix_a(3, 2);
+
+ASSERT_ANY_THROW(matrix_a.Determinant());
+}
 
 TEST(GetTests, test_1)
 {

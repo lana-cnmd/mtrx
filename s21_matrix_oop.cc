@@ -119,7 +119,7 @@ bool S21Matrix::operator!=(const S21Matrix &other) const
 
 double &S21Matrix::operator()(size_t i, size_t j)
 {
-    if (i < 0 || j < 0 || i >= rows_ || j >= cols_)
+    if (i >= rows_ || j >= cols_)
         throw "index is outside the matrix";
     return matrix_[i][j];
 }
@@ -240,9 +240,40 @@ S21Matrix S21Matrix::Transpose()
     return result;
 }
 
-// double S21Matrix::Determinant(){
-
-// }
+double S21Matrix::Determinant(){
+    if(rows_ != cols_)
+        throw "Incorrect matrix";
+    S21Matrix tmp = *this; //
+    size_t currentStart = 0;
+    double first = 0;
+    double det = 1;
+    for(; currentStart < tmp.rows_; currentStart++) { //
+        size_t i = currentStart;
+        if(fabs(tmp.matrix_[currentStart][currentStart]) < 1e-7) {
+            for (; i < tmp.rows_ && fabs(tmp.matrix_[i][currentStart]) < 1e-7; ++i)
+                ;
+            if (i == tmp.rows_)
+            det = 0.0;
+            else {
+            det *= -1;
+                std::swap(tmp.matrix_[currentStart], tmp.matrix_[i]);
+            }
+        }
+        det *= tmp.matrix_[currentStart][currentStart];
+        for (size_t row = currentStart; row < tmp.rows_; ++row) {
+            first = tmp.matrix_[row][currentStart];
+            for (size_t col = currentStart; col < tmp.cols_; ++col) {
+                if (row == currentStart) {
+                    tmp.matrix_[row][col] /= first;
+                }
+                else {
+                    tmp.matrix_[row][col] -= tmp.matrix_[currentStart][col] * first;
+                }
+            }
+        }
+    }
+    return det;
+}
 
 size_t S21Matrix::GetRows() const
 {
@@ -253,9 +284,9 @@ size_t S21Matrix::GetCols() const
     return cols_;
 }
 
+//TODO:
 // void S21Matrix::SetRows(size_t newValue)
 // {
-//     // проверить на размер? если размер больше выделить память
 //     if (newValue == 0)
 //         throw "negative or null value";
 //     if (newValue > rows_)
@@ -275,6 +306,7 @@ size_t S21Matrix::GetCols() const
 //     rows_ = newValue;
 // }
 
+//TODO:
 // void S21Matrix::SetCols(size_t newValue)
 // {
 //     // проверить на размер? если размер больше выделить память
