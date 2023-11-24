@@ -307,16 +307,21 @@ S21Matrix S21Matrix::CalcComplements()
 {
     if (rows_ != cols_)
         throw "the matrix is not square";
+    S21Matrix res(rows_, cols_);
+    if(rows_ == 1) {
+        res.matrix_[0][0] = 1;
+        return res;
+    }
     S21Matrix tmp(rows_ - 1, cols_ - 1);
     for (size_t i = 0; i < rows_; ++i)
     {
         for (size_t j = 0; j < cols_; ++j)
         {
             tmp.CreateMinor(i, j, *this);
-            tmp.matrix_[i][j] = tmp.Determinant() * pow(-1, i + j);
+            res.matrix_[i][j] = tmp.Determinant() * pow(-1, i + j);
         }
     }
-    return tmp;
+    return res;
 }
 
 S21Matrix S21Matrix::InverseMatrix()
