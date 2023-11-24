@@ -240,33 +240,41 @@ S21Matrix S21Matrix::Transpose()
     return result;
 }
 
-double S21Matrix::Determinant(){
-    if(rows_ != cols_)
+double S21Matrix::Determinant()
+{
+    if (rows_ != cols_)
         throw "the matrix is not square";
     S21Matrix tmp = *this; //
     size_t currentStart = 0;
     double first = 0;
     double det = 1;
-    for(; currentStart < tmp.rows_; currentStart++) { //
+    for (; currentStart < tmp.rows_; currentStart++)
+    { //
         size_t i = currentStart;
-        if(fabs(tmp.matrix_[currentStart][currentStart]) < 1e-7) {
+        if (fabs(tmp.matrix_[currentStart][currentStart]) < 1e-7)
+        {
             for (; i < tmp.rows_ && fabs(tmp.matrix_[i][currentStart]) < 1e-7; ++i)
                 ;
             if (i == tmp.rows_)
-            det = 0.0;
-            else {
-            det *= -1;
+                det = 0.0;
+            else
+            {
+                det *= -1;
                 std::swap(tmp.matrix_[currentStart], tmp.matrix_[i]);
             }
         }
         det *= tmp.matrix_[currentStart][currentStart];
-        for (size_t row = currentStart; row < tmp.rows_; ++row) {
+        for (size_t row = currentStart; row < tmp.rows_; ++row)
+        {
             first = tmp.matrix_[row][currentStart];
-            for (size_t col = currentStart; col < tmp.cols_; ++col) {
-                if (row == currentStart) {
+            for (size_t col = currentStart; col < tmp.cols_; ++col)
+            {
+                if (row == currentStart)
+                {
                     tmp.matrix_[row][col] /= first;
                 }
-                else {
+                else
+                {
                     tmp.matrix_[row][col] -= tmp.matrix_[currentStart][col] * first;
                 }
             }
@@ -278,30 +286,50 @@ double S21Matrix::Determinant(){
 void S21Matrix::CreateMinor(size_t rowRemove, size_t colRemove, S21Matrix &other)
 {
     size_t row = 0;
-    for( size_t i = 0; i < other.rows_; ++i) {
+    for (size_t i = 0; i < other.rows_; ++i)
+    {
         size_t col = 0;
-        for (size_t j = 0; j < other.cols_; ++j) { 
-            if (i != rowRemove && j != colRemove) {
+        for (size_t j = 0; j < other.cols_; ++j)
+        {
+            if (i != rowRemove && j != colRemove)
+            {
                 matrix_[row][col] = other.matrix_[i][j];
                 col++;
             }
         }
         col = 0;
-        if (i != rowRemove) row++;
+        if (i != rowRemove)
+            row++;
     }
 }
 
-S21Matrix S21Matrix::CalcComplements() {
-    if(rows_ != cols_)
-        throw "the matrix is not square";      
+S21Matrix S21Matrix::CalcComplements()
+{
+    if (rows_ != cols_)
+        throw "the matrix is not square";
     S21Matrix tmp(rows_ - 1, cols_ - 1);
-    for(size_t i = 0; i < rows_; ++i) {
-        for(size_t j = 0; j < cols_; ++j) { 
+    for (size_t i = 0; i < rows_; ++i)
+    {
+        for (size_t j = 0; j < cols_; ++j)
+        {
             tmp.CreateMinor(i, j, *this);
             tmp.matrix_[i][j] = tmp.Determinant() * pow(-1, i + j);
         }
     }
     return tmp;
+}
+
+S21Matrix S21Matrix::InverseMatrix()
+{
+    double det = this->Determinant();
+    if (det == 0)
+        throw "matrix determinant is 0";
+    S21Matrix tmp;
+    S21Matrix res;
+    tmp = this->CalcComplements();
+    res = tmp.Transpose();
+    res.MulNumber(1 / det);
+    return res;
 }
 
 size_t S21Matrix::GetRows() const
@@ -313,40 +341,14 @@ size_t S21Matrix::GetCols() const
     return cols_;
 }
 
-//TODO:
-// void S21Matrix::SetRows(size_t newValue)
-// {
-//     if (newValue == 0)
-//         throw "negative or null value";
-//     if (newValue > rows_)
-//     {
-//         for(size_t i = 0; i < newValue; ++i) {
-//             for (size_t j = 0; j <)
-//         }
-//         matrix_ = new double *[newValue];
-//     }
-//     if (newValue < rows_) {
-//         for(size_t i = 0; i < newValue; ++i) {
-//             for (size_t j = 0; j < cols_; ++j) {
+// TODO:
+//  void S21Matrix::SetRows(size_t newValue)
+//  {
 
-//             }
-//         }
-//     }
-//     rows_ = newValue;
 // }
 
-//TODO:
-// void S21Matrix::SetCols(size_t newValue)
-// {
-//     // проверить на размер? если размер больше выделить память
-//     if (newValue == 0)
-//         throw "negative or null value";
-//     if (newValue > cols_)
-//     {
-//         for (size_t i = 0; i < rows_; ++i)
-//         {
-//             this->matrix_[i] = new double[newValue]();
-//         }
-//     }
-//     cols_ = newValue;
-// }
+// TODO:
+//  void S21Matrix::SetCols(size_t newValue)
+//  {
+
+//  }
