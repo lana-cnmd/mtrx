@@ -675,10 +675,24 @@ TEST(CalcComplementsTests, test_3)
     ASSERT_ANY_THROW(matrix_a.CalcComplements());
 }
 
-// TEST(InverseMatrix, test_1)
-// {
+TEST(InverseMatrix, test_1)
+{
+    S21Matrix matrix_a(2, 2);
+    matrix_a(0, 0) = 1;
+    matrix_a(0, 1) = 2;
+    matrix_a(1, 0) = 3;
+    matrix_a(1, 1) = 4;
 
-// }
+    S21Matrix result(2, 2);
+    result(0, 0) = -2;
+    result(0, 1) = -1;
+    result(1, 0) = 1.5;
+    result(1, 1) = -0.5;
+
+    S21Matrix inverse = matrix_a.InverseMatrix();
+    ASSERT_EQ(inverse, result);
+
+}
 
 // TEST(Inverse, False)
 // {
