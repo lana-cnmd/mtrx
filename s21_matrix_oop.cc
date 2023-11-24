@@ -65,15 +65,6 @@ bool S21Matrix::EqMatrix(const S21Matrix &other) const
 
 S21Matrix &S21Matrix::operator=(const S21Matrix &other)
 {
-
-    // S21Matrix copy = other;
-    // std::swap(copy);
-    // return *this;
-    // std::swap(other.rows_, rows_);
-    // std::swap(other.cols_, cols_);
-    // std::swap(other.matrix_, matrix_);
-    // return *this;
-
     if (rows_ != other.rows_ || cols_ != other.cols_)
         throw "different matrix dimensions";
 
@@ -104,6 +95,20 @@ S21Matrix &S21Matrix::operator=(const S21Matrix &other)
             matrix_[i][j] = other.matrix_[i][j];
         }
     }
+    return *this;
+}
+
+S21Matrix &S21Matrix::operator=(S21Matrix &&other) noexcept
+{
+    for (size_t i = 0; i < rows_; i++)
+        delete[] matrix_[i];
+    delete[] matrix_;
+    rows_ = other.rows_;
+    cols_ = other.cols_;
+    matrix_ = other.matrix_;
+    other.rows_ = 0;
+    other.cols_ = 0;
+    other.matrix_ = nullptr;
     return *this;
 }
 
@@ -244,6 +249,8 @@ double S21Matrix::Determinant()
 {
     if (rows_ != cols_)
         throw "the matrix is not square";
+    if (rows_ == 1)
+        return matrix_[0][0];
     S21Matrix tmp = *this; //
     size_t currentStart = 0;
     double first = 0;
@@ -308,7 +315,8 @@ S21Matrix S21Matrix::CalcComplements()
     if (rows_ != cols_)
         throw "the matrix is not square";
     S21Matrix res(rows_, cols_);
-    if(rows_ == 1) {
+    if (rows_ == 1)
+    {
         res.matrix_[0][0] = 1;
         return res;
     }

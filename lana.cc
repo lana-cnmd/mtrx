@@ -7,11 +7,13 @@ void func1()
 
 int main()
 {
-    S21Matrix matrix_a(2, 2), matrix_b(2, 2);
-    matrix_a(0, 0) = 2;
-    matrix_a(0, 1) = 3.2;
-    matrix_a(1, 0) = 0;
-    matrix_a(1, 1) = -23.45;
-    matrix_b = matrix_a;
+    S21Matrix matrix_a(2, 2);
+    matrix_a(0, 0) = 1;
+    matrix_a(0, 1) = 2;
+    matrix_a(1, 0) = 3;
+    matrix_a(1, 1) = 4;
+
+    S21Matrix inverse = matrix_a.InverseMatrix();
+
     return 0;
 }

@@ -677,75 +677,59 @@ TEST(CalcComplementsTests, test_3)
 
 TEST(InverseMatrix, test_1)
 {
-    S21Matrix matrix_a(2, 2);
-    matrix_a(0, 0) = 1;
-    matrix_a(0, 1) = 2;
-    matrix_a(1, 0) = 3;
-    matrix_a(1, 1) = 4;
+    S21Matrix matrix_a(4, 3);
+    S21Matrix result(3, 4);
 
-    S21Matrix result(2, 2);
-    result(0, 0) = -2;
-    result(0, 1) = -1;
-    result(1, 0) = 1.5;
-    result(1, 1) = -0.5;
-
-    S21Matrix inverse = matrix_a.InverseMatrix();
-    ASSERT_EQ(inverse, result);
-
+    matrix_a(0, 0) = 7;
+    matrix_a(0, 1) = -98;
+    matrix_a(0, 2) = 0.5;
+    matrix_a(1, 0) = 0;
+    matrix_a(1, 1) = 5.4;
+    matrix_a(1, 2) = 32;
+    matrix_a(2, 0) = 3.12;
+    matrix_a(2, 1) = 2323;
+    matrix_a(2, 2) = 23;
+    matrix_a(3, 0) = -78;
+    matrix_a(3, 1) = 476.4;
+    matrix_a(3, 2) = 21;
+    ASSERT_ANY_THROW(matrix_a.InverseMatrix());
 }
 
-// TEST(Inverse, False)
-// {
-//     S21Matrix matrix_a(4, 3);
-//     S21Matrix result(3, 4);
+TEST(InverseMatrix, test_2)
+{
+    S21Matrix matrix_a(3, 3);
+    matrix_a(0, 0) = 2;
+    matrix_a(0, 1) = 5;
+    matrix_a(0, 2) = 7;
+    matrix_a(1, 0) = 6;
+    matrix_a(1, 1) = 3;
+    matrix_a(1, 2) = 4;
+    matrix_a(2, 0) = 5;
+    matrix_a(2, 1) = -2;
+    matrix_a(2, 2) = -3;
 
-//     matrix_a(0, 0) = 7;
-//     matrix_a(0, 1) = -98;
-//     matrix_a(0, 2) = 0.5;
-//     matrix_a(1, 0) = 0;
-//     matrix_a(1, 1) = 5.4;
-//     matrix_a(1, 2) = 32;
-//     matrix_a(2, 0) = 3.12;
-//     matrix_a(2, 1) = 2323;
-//     matrix_a(2, 2) = 23;
-//     matrix_a(3, 0) = -78;
-//     matrix_a(3, 1) = 476.4;
-//     matrix_a(3, 2) = 21;
-//     ASSERT_ANY_THROW(matrix_a.InverseMatrix());
-// }
-// TEST(Inverse, True)
-// {
-//     S21Matrix matrix_a(3, 3);
-//     S21Matrix result(3, 3);
+    S21Matrix result(3, 3);
+    result(0, 0) = 1;
+    result(0, 1) = -1;
+    result(0, 2) = 1;
+    result(1, 0) = -38;
+    result(1, 1) = 41;
+    result(1, 2) = -34;
+    result(2, 0) = 27;
+    result(2, 1) = -29;
+    result(2, 2) = 24;
 
-//     matrix_a(0, 0) = 2;
-//     matrix_a(0, 1) = 5;
-//     matrix_a(0, 2) = 7;
-//     matrix_a(1, 0) = 6;
-//     matrix_a(1, 1) = 3;
-//     matrix_a(1, 2) = 4;
-//     matrix_a(2, 0) = 5;
-//     matrix_a(2, 1) = -2;
-//     matrix_a(2, 2) = -3;
+    ASSERT_TRUE(matrix_a.InverseMatrix().EqMatrix(result));
+}
 
-//     result(0, 0) = 1;
-//     result(0, 1) = -1;
-//     result(0, 2) = 1;
-//     result(1, 0) = -38;
-//     result(1, 1) = 41;
-//     result(1, 2) = -34;
-//     result(2, 0) = 27;
-//     result(2, 1) = -29;
-//     result(2, 2) = 24;
-
-//     ASSERT_TRUE(matrix_a.InverseMatrix().EqMatrix(result));
-
-//     S21Matrix matrix_c(1, 1);
-//     S21Matrix matrix_c_res(1, 1);
-//     matrix_c_res(0, 0) = 1;
-//     matrix_c(0, 0) = 1;
-//     ASSERT_TRUE(matrix_c.InverseMatrix().EqMatrix(matrix_c_res));
-// }
+TEST(InverseMatrix, test_3)
+{
+    S21Matrix matrix_c(1, 1);
+    S21Matrix matrix_c_res(1, 1);
+    matrix_c_res(0, 0) = 1;
+    matrix_c(0, 0) = 1;
+    ASSERT_TRUE(matrix_c.InverseMatrix().EqMatrix(matrix_c_res));
+}
 
 TEST(GetTests, test_1)
 {
