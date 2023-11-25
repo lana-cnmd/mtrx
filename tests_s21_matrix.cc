@@ -581,9 +581,10 @@ TEST(TransponceMatrix, test_3)
     ASSERT_TRUE(transponse == result);
 }
 
-// TEST(DeterminantTests, test_1) {
-//   S21Matrix matrix_a(3, 3);
-//   matrix_a(0, 0) = 0;
+// TEST(DeterminantTests, test_1)
+// {
+//     S21Matrix matrix_a(3, 3);
+//     matrix_a(0, 0) = 0;
 //     matrix_a(0, 1) = 5;
 //     matrix_a(0, 2) = 7;
 //     matrix_a(1, 0) = 6;
@@ -593,10 +594,10 @@ TEST(TransponceMatrix, test_3)
 //     matrix_a(2, 1) = -2;
 //     matrix_a(2, 2) = -3;
 
-//   double det = matrix_a.Determinant();
-//   double result = 1;
+//     double det = matrix_a.Determinant();
+//     double result = 1;
 
-// ASSERT_EQ(det, result);
+//     ASSERT_EQ(det, result);
 // }
 
 TEST(DeterminantTests, test_2)

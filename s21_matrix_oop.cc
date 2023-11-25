@@ -355,13 +355,33 @@ size_t S21Matrix::GetCols() const
 }
 
 // TODO:
-//  void S21Matrix::SetRows(size_t newValue)
-//  {
-
-// }
+void S21Matrix::SetRows(size_t newValue)
+{
+    if (newValue < 1)
+        throw "Invalid Matrix size";
+    S21Matrix tmp(newValue, cols_);
+    if (newValue < rows_)
+    {
+        // just copy
+    }
+    if (newValue > rows_)
+    {
+        // alocate memory
+    }
+}
 
 // TODO:
-//  void S21Matrix::SetCols(size_t newValue)
-//  {
-
-//  }
+void S21Matrix::SetCols(size_t newValue)
+{
+    if (newValue < 1)
+        throw "Invalid Matrix size";
+    S21Matrix tmp(rows_, newValue);
+    if (newValue < cols_)
+    {
+        // copy
+    }
+    if (newValue > cols_)
+    {
+        // allocate memory
+    }
+}

@@ -26,8 +26,8 @@ public:
 
     size_t GetRows() const;
     size_t GetCols() const;
-    // void SetRows(size_t newValue);
-    // void SetCols(size_t newValue);
+    void SetRows(size_t newValue);
+    void SetCols(size_t newValue);
 
     S21Matrix &operator=(const S21Matrix &other); // net
     S21Matrix &operator=(S21Matrix &&other) noexcept;
