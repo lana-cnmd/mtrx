@@ -115,6 +115,33 @@ TEST(EqMatrix, test_7)
     ASSERT_EQ(matrix_a.EqMatrix(matrix_b), 1);
 }
 
+TEST(EqMatrix, test_8)
+{
+    S21Matrix matrix_a(2, 2);
+    matrix_a(0, 0) = 2;
+    matrix_a(0, 1) = 3.2;
+    matrix_a(1, 0) = 0;
+    matrix_a(1, 1) = -23.45;
+
+    S21Matrix matrix_b(1, 1);
+    matrix_b(0, 0) = 1;
+
+    ASSERT_FALSE(matrix_a.EqMatrix(matrix_b));
+}
+
+TEST(EqMatrix, test_9)
+{
+    S21Matrix matrix_a(2, 2);
+    void* ptr1 = &matrix_a;
+    matrix_a(0, 0) = 2;
+    matrix_a(0, 1) = 3.2;
+    matrix_a(1, 0) = 0;
+    matrix_a(1, 1) = -23.45;
+    matrix_a = matrix_a;
+    void* ptr2 = &matrix_a;
+    ASSERT_EQ(ptr1, ptr2);
+}
+
 TEST(SumMatrixTests, test_1)
 {
     S21Matrix matrix_a(2, 2);
@@ -581,24 +608,24 @@ TEST(TransponceMatrix, test_3)
     ASSERT_TRUE(transponse == result);
 }
 
-// TEST(DeterminantTests, test_1)
-// {
-//     S21Matrix matrix_a(3, 3);
-//     matrix_a(0, 0) = 0;
-//     matrix_a(0, 1) = 5;
-//     matrix_a(0, 2) = 7;
-//     matrix_a(1, 0) = 6;
-//     matrix_a(1, 1) = 3;
-//     matrix_a(1, 2) = 4;
-//     matrix_a(2, 0) = 5;
-//     matrix_a(2, 1) = -2;
-//     matrix_a(2, 2) = -3;
+TEST(DeterminantTests, test_1)
+{
+    S21Matrix matrix_a(3, 3);
+    matrix_a(0, 0) = 0;
+    matrix_a(0, 1) = 5;
+    matrix_a(0, 2) = 7;
+    matrix_a(1, 0) = 6;
+    matrix_a(1, 1) = 3;
+    matrix_a(1, 2) = 4;
+    matrix_a(2, 0) = 5;
+    matrix_a(2, 1) = -2;
+    matrix_a(2, 2) = -3;
 
-//     double det = matrix_a.Determinant();
-//     double result = 1;
+    double det = matrix_a.Determinant();
+    double result = 0.99999999999999645;
 
-//     ASSERT_EQ(det, result);
-// }
+    ASSERT_DOUBLE_EQ(det, result);
+}
 
 TEST(DeterminantTests, test_2)
 {
@@ -732,6 +759,15 @@ TEST(InverseMatrix, test_3)
     ASSERT_TRUE(matrix_c.InverseMatrix().EqMatrix(matrix_c_res));
 }
 
+TEST(InverseMatrix, test_4)
+{
+    S21Matrix matrix_c(1, 1);
+    S21Matrix matrix_c_res(1, 1);
+    matrix_c_res(0, 0) = 0;
+    matrix_c(0, 0) = 0;
+    ASSERT_ANY_THROW(matrix_c.InverseMatrix().EqMatrix(matrix_c_res));
+}
+
 TEST(GetTests, test_1)
 {
     S21Matrix matrix_a(3, 3);
@@ -779,42 +815,81 @@ TEST(GetTests, test_3)
     ASSERT_EQ(matrix_a.GetCols(), (size_t)1);
 }
 
-// TEST(SetTests, test_1)
-// {
-//     S21Matrix matrix_a(3, 3);
+TEST(SetTests, test_1)
+{
+    S21Matrix matrix_a(3, 3);
 
-//     matrix_a(0, 0) = 2;
-//     matrix_a(0, 1) = 5;
-//     matrix_a(0, 2) = 7;
-//     matrix_a(1, 0) = 6;
-//     matrix_a(1, 1) = 3;
-//     matrix_a(1, 2) = 4;
-//     matrix_a(2, 0) = 5;
-//     matrix_a(2, 1) = -2;
-//     matrix_a(2, 2) = -3;
+    matrix_a(0, 0) = 2;
+    matrix_a(0, 1) = 5;
+    matrix_a(0, 2) = 7;
+    matrix_a(1, 0) = 6;
+    matrix_a(1, 1) = 3;
+    matrix_a(1, 2) = 4;
+    matrix_a(2, 0) = 5;
+    matrix_a(2, 1) = -2;
+    matrix_a(2, 2) = -3;
 
-//     matrix_a.SetCols(2);
-//     matrix_a.SetRows(2);
+    matrix_a.SetCols(2);
+    matrix_a.SetRows(2);
 
-//     ASSERT_EQ(matrix_a.GetCols(), (size_t)2);
-//     ASSERT_EQ(matrix_a.GetRows(), (size_t)2);
-// }
+    ASSERT_EQ(matrix_a.GetCols(), (size_t)2);
+    ASSERT_EQ(matrix_a.GetRows(), (size_t)2);
+}
 
-// TEST(SetTests, test_2)
-// {
-//     S21Matrix matrix_a(2, 2);
+TEST(SetTests, test_2)
+{
+    S21Matrix matrix_a(2, 2);
+    matrix_a(0, 0) = 2;
+    matrix_a(0, 1) = 5;
+    matrix_a(1, 0) = 6;
+    matrix_a(1, 1) = 3;
 
-//     matrix_a(0, 0) = 2;
-//     matrix_a(0, 1) = 5;
-//     matrix_a(1, 0) = 6;
-//     matrix_a(1, 1) = 3;
+    matrix_a.SetCols(3);
+    matrix_a.SetRows(3);
 
-//     matrix_a.SetCols(3);
-//     matrix_a.SetRows(3);
+    ASSERT_EQ(matrix_a.GetCols(), (size_t)3);
+    ASSERT_EQ(matrix_a.GetRows(), (size_t)3);
+}
 
-//     ASSERT_EQ(matrix_a.GetCols(), (size_t)3);
-//     ASSERT_EQ(matrix_a.GetRows(), (size_t)3);
-// }
+TEST(SetTests, test_3)
+{
+    S21Matrix matrix_a(2, 2);
+    ASSERT_ANY_THROW(matrix_a.SetCols(0));
+    ASSERT_ANY_THROW(matrix_a.SetRows(0));
+}
+
+TEST(OperMoveTests, test_1)
+{
+    S21Matrix matrix_a(2, 2);
+    matrix_a(0, 0) = 2;
+    matrix_a(0, 1) = 5;
+    matrix_a(1, 0) = 6;
+    matrix_a(1, 1) = 3;
+    S21Matrix result = matrix_a;
+
+    S21Matrix matrix_b(2, 2);
+    matrix_b = std::move(matrix_a);
+
+    S21Matrix res2;
+    ASSERT_EQ(matrix_b, result); 
+    ASSERT_EQ(matrix_a, res2);
+}
+
+TEST(ConstructorMoveTests, test_1)
+{
+    S21Matrix matrix_a(2, 2);
+    matrix_a(0, 0) = 2;
+    matrix_a(0, 1) = 5;
+    matrix_a(1, 0) = 6;
+    matrix_a(1, 1) = 3;
+    S21Matrix result = matrix_a;
+
+    S21Matrix matrix_b = std::move(matrix_a);
+
+    S21Matrix res2;
+    ASSERT_EQ(matrix_b, result); 
+    ASSERT_EQ(matrix_a, res2);
+}
 
 int main(int argc, char *argv[])
 {
