@@ -1,5 +1,0 @@
-    17. determinant
-    18. calc complements
-    19. inverse matrix
-    ?. move constructor
-+    set rows set cols_(bad alloc)
